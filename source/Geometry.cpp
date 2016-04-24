@@ -104,40 +104,89 @@ void Quad_t::render(ID3D11DeviceContext* device_context) const
 Cube_t::Cube_t(ID3D11Device* device)
 {
 	// populate the vertex array with 4 vertices
-	vertex_t v0, v1, v2, v3, v4, v5, v6, v7;
-	v0.Pos = { -0.5, -0.5f, 0.5f };
+	vertex_t vPos0, vPos1, vPos2, vPos3, vPos4, vPos5, vPos6, vPos7;
+
+	vPos0.Pos = { -0.5, -0.5f, 0.5f };
+	vPos1.Pos = { 0.5, -0.5f, 0.5f };
+	vPos2.Pos = { 0.5, 0.5f, 0.5f };
+	vPos3.Pos = { -0.5, 0.5f, 0.5f };
+
+	vPos4.Pos = { 0.5, -0.5f, -0.5f };
+	vPos5.Pos = { -0.5, -0.5f, -0.5f };
+	vPos6.Pos = { -0.5, 0.5f, -0.5f };
+	vPos7.Pos = { 0.5, 0.5f, -0.5f };
+
+
+	vertex_t v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23;
+
+	//front
+	v0.Pos = vPos0.Pos;
 	v0.Normal = { 0, 0, 1 };
 	v0.TexCoord = { 0, 0 };
 
-	v1.Pos = { 0.5, -0.5f, 0.5f };
+	v1.Pos = vPos1.Pos;
 	v1.Normal = { 0, 0, 1 };
 	v1.TexCoord = { 0, 1 };
 
-	v2.Pos = { 0.5, 0.5f, 0.5f };
+	v2.Pos = vPos2.Pos;
 	v2.Normal = { 0, 0, 1 };
 	v2.TexCoord = { 1, 1 };
 
-	v3.Pos = { -0.5, 0.5f, 0.5f };
+	v3.Pos = vPos3.Pos;
 	v3.Normal = { 0, 0, 1 };
 	v3.TexCoord = { 1, 0 };
 
 
-
-	v4.Pos = { -0.5, -0.5f, -0.5f };
-	v4.Normal = { 0, 0, -1 };
+	//right side
+	v4.Pos = vPos1.Pos;
+	v4.Normal = { 1, 0, 0 };
 	v4.TexCoord = { 0, 0 };
 
-	v5.Pos = { 0.5, -0.5f, -0.5f };
-	v5.Normal = { 0, 0, -1 };
+	v5.Pos = vPos4.Pos;
+	v5.Normal = { 1, 0, 0 };
 	v5.TexCoord = { 0, 1 };
 
-	v6.Pos = { 0.5, 0.5f, -0.5f };
-	v6.Normal = { 0, 0, -1 };
+	v6.Pos = vPos7.Pos;
+	v6.Normal = { 1, 0, 0 };
 	v6.TexCoord = { 1, 1 };
 
-	v7.Pos = { -0.5, 0.5f, -0.5f };
-	v7.Normal = { 0, 0, -1 };
+	v7.Pos = vPos2.Pos;
+	v7.Normal = { 1, 0, 0 };
 	v7.TexCoord = { 1, 0 };
+
+	//back side
+	v8.Pos = vPos4.Pos;
+	v8.Normal = { 0, 0, -1 };
+	v8.TexCoord = { 0, 0 };
+
+	v9.Pos = vPos5.Pos;
+	v9.Normal = { 0, 0, -1 };
+	v9.TexCoord = { 0, 1 };
+
+	v10.Pos = vPos6.Pos;
+	v10.Normal = { 0, 0, -1 };
+	v10.TexCoord = { 1, 1 };
+
+	v11.Pos = vPos7.Pos;
+	v11.Normal = { 0, 0, -1 };
+	v11.TexCoord = { 1, 0 };
+
+	//left side
+	v12.Pos = vPos5.Pos;
+	v12.Normal = { -1, 0, 0 };
+	v12.TexCoord = { 0, 0 };
+
+	v13.Pos = vPos0.Pos;
+	v13.Normal = { -1, 0, 0 };
+	v13.TexCoord = { 0, 1 };
+
+	v14.Pos = vPos3.Pos;
+	v14.Normal = { -1, 0, 0 };
+	v14.TexCoord = { 1, 1 };
+
+	v15.Pos = vPos6.Pos;
+	v15.Normal = { -1, 0, 0 };
+	v15.TexCoord = { 1, 0 };
 
 
 
@@ -150,25 +199,65 @@ Cube_t::Cube_t(ID3D11Device* device)
 	vertices.push_back(v5);
 	vertices.push_back(v6);
 	vertices.push_back(v7);
+	vertices.push_back(v8);
+	vertices.push_back(v9);
+	vertices.push_back(v10);
+	vertices.push_back(v11);
+	vertices.push_back(v12);
+	vertices.push_back(v13);
+	vertices.push_back(v14);
+	vertices.push_back(v15);
 
 	// populate the index array
-	// triangle #1
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(3);
-	// triangle #2
-	indices.push_back(1);
-	indices.push_back(2);
-	indices.push_back(3);
 
+
+	int offset = 0;
+
+	//quad1
 	// triangle #1
-	indices.push_back(4);
-	indices.push_back(7);
-	indices.push_back(5);
+	indices.push_back(0 + offset);
+	indices.push_back(1 + offset);
+	indices.push_back(3 + offset);
 	// triangle #2
-	indices.push_back(5);
-	indices.push_back(7);
-	indices.push_back(6);
+	indices.push_back(1 + offset);
+	indices.push_back(2 + offset);
+	indices.push_back(3 + offset);
+
+	offset += 4;
+
+	//quad2 (right side)
+	// triangle #1
+	indices.push_back(0 + offset);
+	indices.push_back(1 + offset);
+	indices.push_back(3 + offset);
+	// triangle #2
+	indices.push_back(1 + offset);
+	indices.push_back(2 + offset);
+	indices.push_back(3 + offset);
+
+	offset += 4;
+
+	//quad3 (back side)
+	// triangle #1
+	indices.push_back(0 + offset);
+	indices.push_back(1 + offset);
+	indices.push_back(3 + offset);
+	// triangle #2
+	indices.push_back(1 + offset);
+	indices.push_back(2 + offset);
+	indices.push_back(3 + offset);
+
+	offset += 4;
+
+	//quad4 (left side)
+	// triangle #1
+	indices.push_back(0 + offset);
+	indices.push_back(1 + offset);
+	indices.push_back(3 + offset);
+	// triangle #2
+	indices.push_back(1 + offset);
+	indices.push_back(2 + offset);
+	indices.push_back(3 + offset);
 
 	// vertex array descriptor
 	D3D11_BUFFER_DESC vbufferDesc = { 0.0f };
