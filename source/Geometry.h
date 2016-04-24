@@ -66,6 +66,23 @@ public:
 	~Quad_t() { }
 };
 
+
+class Cube_t : public Geometry_t
+{
+	// our local vertex and index arrays
+	std::vector<vertex_t> vertices;
+	std::vector<unsigned> indices;
+	unsigned nbr_indices = 0;
+
+public:
+
+	Cube_t(ID3D11Device* device);
+
+	void render(ID3D11DeviceContext* device_context) const;
+
+	~Cube_t() { }
+};
+
 class OBJModel_t : public Geometry_t
 {
 	// index ranges, representing drawcalls, within an index array

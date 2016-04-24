@@ -52,7 +52,7 @@ void				Release();
 //
 camera_t* camera;
 float camera_vel = 1.5f;	// world unit/s
-Quad_t* quad;
+Cube_t* cube;
 OBJModel_t* obj;
 // model-to-world matrices
 mat4f Mtyre;
@@ -77,7 +77,7 @@ void initObjects()
 	camera->moveTo({ 0, 0, 5 });
 
 	// create objects
-	quad = new Quad_t(g_Device);
+	cube = new Cube_t(g_Device);
 	obj = new OBJModel_t("../../assets/tyre/Tyre.obj", g_Device);
 }
 
@@ -109,8 +109,8 @@ void renderObjects()
 	Mview = camera->get_WorldToViewMatrix();
 	Mproj = camera->get_ProjectionMatrix();
 
-	quad->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
-	quad->render(g_DeviceContext);
+	cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
+	cube->render(g_DeviceContext);
 	
 	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre, Mview, Mproj);
 	obj->render(g_DeviceContext);
@@ -121,7 +121,7 @@ void renderObjects()
 //
 void releaseObjects()
 {
-	SAFE_DELETE(quad);
+	SAFE_DELETE(cube);
 	SAFE_DELETE(obj);
 }
 
@@ -422,6 +422,7 @@ void InitRasterizerState()
 {
 	D3D11_RASTERIZER_DESC rasterizerState;
 	rasterizerState.FillMode = D3D11_FILL_SOLID;
+	//rasterizerState.FillMode = D3D11_FILL_WIREFRAME;//D3D11_FILL_SOLID; <-- temp change
 	rasterizerState.CullMode = D3D11_CULL_BACK;
 	rasterizerState.FrontCounterClockwise = true;
 	rasterizerState.DepthBias = false;

@@ -1,0 +1,34 @@
+﻿Build started 2016-04-24 02:30:40.
+     1>Project "D:\SourceTree\eduRend\source\Template.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\DirectXTK\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"D:\SourceTree\eduRend\source\../Obj/x86/Debug/" /Fd"D:\SourceTree\eduRend\source\../Obj/x86/Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Geometry.cpp
+         Geometry.cpp
+         c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>d:\sourcetree\edurend\source\vec\math.h(48): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
+     1>d:\sourcetree\edurend\source\file_rw.h(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>d:\sourcetree\edurend\source\file_rw.h(58): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>d:\sourcetree\edurend\source\mesh.h(68): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\sourcetree\edurend\source\mesh.h(71): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\sourcetree\edurend\source\geometry.cpp(55): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(68): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(174): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(187): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(256): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(269): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\vec\vec.h(479): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
+                 d:\sourcetree\edurend\source\mesh.h(58) : see reference to function template instantiation 'linalg::vec3<float> linalg::normalize<float>(const linalg::vec3<float> &)' being compiled
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\DirectXTK\lib\debug DirectXTK.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.lib" /MACHINE:X86 /SAFESEH D:\SourceTree\eduRend\source\../Obj/x86/Debug/Geometry.obj
+         D:\SourceTree\eduRend\source\../Obj/x86/Debug/InputHandler.obj
+         D:\SourceTree\eduRend\source\../Obj/x86/Debug/mesh.obj
+         D:\SourceTree\eduRend\source\../Obj/x86/Debug/Main.obj
+         D:\SourceTree\eduRend\source\../Obj/x86/Debug/mat.obj
+         D:\SourceTree\eduRend\source\../Obj/x86/Debug/vec.obj
+         Template.vcxproj -> D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.exe
+     1>Done Building Project "D:\SourceTree\eduRend\source\Template.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.23
