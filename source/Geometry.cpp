@@ -104,89 +104,106 @@ void Quad_t::render(ID3D11DeviceContext* device_context) const
 Cube_t::Cube_t(ID3D11Device* device)
 {
 	// populate the vertex array with 4 vertices
-	vertex_t vPos0, vPos1, vPos2, vPos3, vPos4, vPos5, vPos6, vPos7;
+	vec3f vPos0, vPos1, vPos2, vPos3, vPos4, vPos5, vPos6, vPos7;
 
-	vPos0.Pos = { -0.5, -0.5f, 0.5f };
-	vPos1.Pos = { 0.5, -0.5f, 0.5f };
-	vPos2.Pos = { 0.5, 0.5f, 0.5f };
-	vPos3.Pos = { -0.5, 0.5f, 0.5f };
+	vPos0 = { -0.5, -0.5f, 0.5f };
+	vPos1 = { 0.5, -0.5f, 0.5f };
+	vPos2 = { 0.5, 0.5f, 0.5f };
+	vPos3 = { -0.5, 0.5f, 0.5f };
 
-	vPos4.Pos = { 0.5, -0.5f, -0.5f };
-	vPos5.Pos = { -0.5, -0.5f, -0.5f };
-	vPos6.Pos = { -0.5, 0.5f, -0.5f };
-	vPos7.Pos = { 0.5, 0.5f, -0.5f };
+	vPos4 = { 0.5, -0.5f, -0.5f };
+	vPos5 = { -0.5, -0.5f, -0.5f };
+	vPos6 = { -0.5, 0.5f, -0.5f };
+	vPos7 = { 0.5, 0.5f, -0.5f };
 
 
 	vertex_t v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23;
 
 	//front
-	v0.Pos = vPos0.Pos;
+	v0.Pos = vPos0;
 	v0.Normal = { 0, 0, 1 };
 	v0.TexCoord = { 0, 0 };
 
-	v1.Pos = vPos1.Pos;
+	v1.Pos = vPos1;
 	v1.Normal = { 0, 0, 1 };
 	v1.TexCoord = { 0, 1 };
 
-	v2.Pos = vPos2.Pos;
+	v2.Pos = vPos2;
 	v2.Normal = { 0, 0, 1 };
 	v2.TexCoord = { 1, 1 };
 
-	v3.Pos = vPos3.Pos;
+	v3.Pos = vPos3;
 	v3.Normal = { 0, 0, 1 };
 	v3.TexCoord = { 1, 0 };
 
 
 	//right side
-	v4.Pos = vPos1.Pos;
+	v4.Pos = vPos1;
 	v4.Normal = { 1, 0, 0 };
 	v4.TexCoord = { 0, 0 };
 
-	v5.Pos = vPos4.Pos;
+	v5.Pos = vPos4;
 	v5.Normal = { 1, 0, 0 };
 	v5.TexCoord = { 0, 1 };
 
-	v6.Pos = vPos7.Pos;
+	v6.Pos = vPos7;
 	v6.Normal = { 1, 0, 0 };
 	v6.TexCoord = { 1, 1 };
 
-	v7.Pos = vPos2.Pos;
+	v7.Pos = vPos2;
 	v7.Normal = { 1, 0, 0 };
 	v7.TexCoord = { 1, 0 };
 
 	//back side
-	v8.Pos = vPos4.Pos;
+	v8.Pos = vPos4;
 	v8.Normal = { 0, 0, -1 };
 	v8.TexCoord = { 0, 0 };
 
-	v9.Pos = vPos5.Pos;
+	v9.Pos = vPos5;
 	v9.Normal = { 0, 0, -1 };
 	v9.TexCoord = { 0, 1 };
 
-	v10.Pos = vPos6.Pos;
+	v10.Pos = vPos6;
 	v10.Normal = { 0, 0, -1 };
 	v10.TexCoord = { 1, 1 };
 
-	v11.Pos = vPos7.Pos;
+	v11.Pos = vPos7;
 	v11.Normal = { 0, 0, -1 };
 	v11.TexCoord = { 1, 0 };
 
 	//left side
-	v12.Pos = vPos5.Pos;
+	v12.Pos = vPos5;
 	v12.Normal = { -1, 0, 0 };
 	v12.TexCoord = { 0, 0 };
 
-	v13.Pos = vPos0.Pos;
+	v13.Pos = vPos0;
 	v13.Normal = { -1, 0, 0 };
 	v13.TexCoord = { 0, 1 };
 
-	v14.Pos = vPos3.Pos;
+	v14.Pos = vPos3;
 	v14.Normal = { -1, 0, 0 };
 	v14.TexCoord = { 1, 1 };
 
-	v15.Pos = vPos6.Pos;
+	v15.Pos = vPos6;
 	v15.Normal = { -1, 0, 0 };
 	v15.TexCoord = { 1, 0 };
+
+	//up side
+	v16.Pos = vPos5;
+	v16.Normal = { 0, -1, 0 };
+	v16.TexCoord = { 0, 0 };
+
+	v17.Pos = vPos4;
+	v17.Normal = { 0, -1, 0 };
+	v17.TexCoord = { 0, 1 };
+
+	v18.Pos = vPos1;
+	v18.Normal = { 0, -1, 0 };
+	v18.TexCoord = { 1, 1 };
+
+	v19.Pos = vPos0;
+	v19.Normal = { 0, -1, 0 };
+	v19.TexCoord = { 1, 0 };
 
 
 

@@ -421,8 +421,8 @@ HRESULT InitDirect3DAndSwapChain(int width, int height)
 void InitRasterizerState()
 {
 	D3D11_RASTERIZER_DESC rasterizerState;
-	rasterizerState.FillMode = D3D11_FILL_SOLID;
-	//rasterizerState.FillMode = D3D11_FILL_WIREFRAME;//D3D11_FILL_SOLID; <-- temp change
+	//rasterizerState.FillMode = D3D11_FILL_SOLID;
+	rasterizerState.FillMode = D3D11_FILL_WIREFRAME;//D3D11_FILL_SOLID; <-- temp change
 	rasterizerState.CullMode = D3D11_CULL_BACK;
 	rasterizerState.FrontCounterClockwise = true;
 	rasterizerState.DepthBias = false;
