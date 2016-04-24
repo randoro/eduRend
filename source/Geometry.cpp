@@ -188,7 +188,7 @@ Cube_t::Cube_t(ID3D11Device* device)
 	v15.Normal = { -1, 0, 0 };
 	v15.TexCoord = { 1, 0 };
 
-	//up side
+	//down side
 	v16.Pos = vPos5;
 	v16.Normal = { 0, -1, 0 };
 	v16.TexCoord = { 0, 0 };
@@ -204,6 +204,23 @@ Cube_t::Cube_t(ID3D11Device* device)
 	v19.Pos = vPos0;
 	v19.Normal = { 0, -1, 0 };
 	v19.TexCoord = { 1, 0 };
+
+	//up side
+	v20.Pos = vPos3;
+	v20.Normal = { 0, 1, 0 };
+	v20.TexCoord = { 0, 0 };
+
+	v21.Pos = vPos2;
+	v21.Normal = { 0, 1, 0 };
+	v21.TexCoord = { 0, 1 };
+
+	v22.Pos = vPos7;
+	v22.Normal = { 0, 1, 0 };
+	v22.TexCoord = { 1, 1 };
+
+	v23.Pos = vPos6;
+	v23.Normal = { 0, 1, 0 };
+	v23.TexCoord = { 1, 0 };
 
 
 
@@ -224,6 +241,14 @@ Cube_t::Cube_t(ID3D11Device* device)
 	vertices.push_back(v13);
 	vertices.push_back(v14);
 	vertices.push_back(v15);
+	vertices.push_back(v16);
+	vertices.push_back(v17);
+	vertices.push_back(v18);
+	vertices.push_back(v19);
+	vertices.push_back(v20);
+	vertices.push_back(v21);
+	vertices.push_back(v22);
+	vertices.push_back(v23);
 
 	// populate the index array
 
@@ -267,6 +292,30 @@ Cube_t::Cube_t(ID3D11Device* device)
 	offset += 4;
 
 	//quad4 (left side)
+	// triangle #1
+	indices.push_back(0 + offset);
+	indices.push_back(1 + offset);
+	indices.push_back(3 + offset);
+	// triangle #2
+	indices.push_back(1 + offset);
+	indices.push_back(2 + offset);
+	indices.push_back(3 + offset);
+
+	offset += 4;
+
+	//quad5 (down side)
+	// triangle #1
+	indices.push_back(0 + offset);
+	indices.push_back(1 + offset);
+	indices.push_back(3 + offset);
+	// triangle #2
+	indices.push_back(1 + offset);
+	indices.push_back(2 + offset);
+	indices.push_back(3 + offset);
+
+	offset += 4;
+
+	//quad6 (up side)
 	// triangle #1
 	indices.push_back(0 + offset);
 	indices.push_back(1 + offset);

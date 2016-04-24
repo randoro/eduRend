@@ -18,6 +18,8 @@ class camera_t
 	float vfov, aspect;	// aperture attributes
 	float zNear, zFar;	// clip planes
 	vec3f position;
+	float angle = 0;			// rad
+	float angle_vel = fPI / 4;	// rad/s
 
 public:
 
@@ -41,9 +43,24 @@ public:
 		position += v;
 	}
 
+	void rotate(const float v)
+	{
+		angle += v;
+	}
+
 	mat4f get_WorldToViewMatrix() const
 	{
-		return mat4f::translation(-position);
+		mat4f T, R, S, M;
+		T = mat4f::translation(-position);
+		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
+		//R = mat4f::rotation(fPI / 4, fPI / 4, 0.0f);
+		S = mat4f::scaling(1, 1, 1);
+		M = R * T * S;
+		return M;
+		/*view.rotation =*/ //mat4f::rotation(0.2f, 0.0f, 1.0f, 0.0f);
+
+		//return view.translation(-position);
+		//return mat4f::translation(-position); // *mat4f::rotation(angle, 1.0f, 0.0f, 0.0f);
 	}
 
 	mat4f get_ProjectionMatrix() const
