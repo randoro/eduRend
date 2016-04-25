@@ -38,9 +38,47 @@ public:
 		position = p;
 	}
 
-	void move(const vec3f& v)
+	void moveForward(const vec3f& v)
 	{
-		position += v;
+		mat4f R, T, S, C, M, F;
+		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
+		T = mat4f::translation(position);
+		S = mat4f::scaling(1, 1, 1);
+		M = T * R; // *S;
+		C = mat4f(v.x, v.y, v.z, 0);//(0, 0, -1, 0);
+		F = M * C;
+		//M.operator*(vec4f(0, 0, -1, 0));//vec4f(v.x, v.y, v.z, 0));
+
+		position += vec3f(F.col[2].x, F.col[2].y, F.col[2].z);
+
+		int i = 1;
+		//position += v;
+	}
+
+	void moveSide(const vec3f& v)
+	{
+		mat4f R, T, S, C, M, F;
+		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
+		T = mat4f::translation(position);
+		M = T * R;
+		C = mat4f(v.x, v.y, v.z, 0);
+		F = M * C;
+
+		position += vec3f(F.col[0].x, F.col[0].y, F.col[0].z);
+
+	}
+
+	void moveUpDown(const vec3f& v)
+	{
+		mat4f R, T, S, C, M, F;
+		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
+		T = mat4f::translation(position);
+		M = T * R;
+		C = mat4f(v.x, v.y, v.z, 0);
+		F = M * C;
+
+		position += vec3f(F.col[1].x, F.col[1].y, F.col[1].z);
+
 	}
 
 	void rotate(const float v)
@@ -51,11 +89,9 @@ public:
 	mat4f get_WorldToViewMatrix() const
 	{
 		mat4f T, R, S, M;
+		R = mat4f::rotation(-angle, 0.0f, 1.0f, 0.0f);
 		T = mat4f::translation(-position);
-		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
-		//R = mat4f::rotation(fPI / 4, fPI / 4, 0.0f);
-		S = mat4f::scaling(1, 1, 1);
-		M = R * T * S;
+		M = R * T;
 		return M;
 		/*view.rotation =*/ //mat4f::rotation(0.2f, 0.0f, 1.0f, 0.0f);
 

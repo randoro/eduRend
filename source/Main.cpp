@@ -88,21 +88,21 @@ void updateObjects(float dt)
 {
 	// basic camera control
 	if (g_InputHandler->IsKeyPressed(Keys::Up) || g_InputHandler->IsKeyPressed(Keys::W))
-		camera->move({ 0.0f, 0.0f, -camera_vel *dt });
+		camera->moveForward({ 0.0f, 0.0f, -camera_vel *dt });
 	if (g_InputHandler->IsKeyPressed(Keys::Down) || g_InputHandler->IsKeyPressed(Keys::S))
-		camera->move({ 0.0f, 0.0f, camera_vel *dt });
+		camera->moveForward({ 0.0f, 0.0f, camera_vel *dt });
 	if (g_InputHandler->IsKeyPressed(Keys::Right) || g_InputHandler->IsKeyPressed(Keys::D))
-		camera->move({ camera_vel *dt, 0.0f, 0.0f });
+		camera->moveSide({ camera_vel *dt, 0.0f, 0.0f });
 	if (g_InputHandler->IsKeyPressed(Keys::Left) || g_InputHandler->IsKeyPressed(Keys::A))
-		camera->move({ -camera_vel *dt, 0.0f, 0.0f });
+		camera->moveSide({ -camera_vel *dt, 0.0f, 0.0f });
 	if (g_InputHandler->IsKeyPressed(Keys::Space))
-		camera->move({ 0.0f, camera_vel *dt, 0.0f });
+		camera->moveUpDown({ 0.0f, camera_vel *dt, 0.0f });
 	if (g_InputHandler->IsKeyPressed(Keys::Shift))
-		camera->move({ 0.0f, -camera_vel *dt, 0.0f });
+		camera->moveUpDown({ 0.0f, -camera_vel *dt, 0.0f });
 	if (g_InputHandler->IsKeyPressed(Keys::Q))
-		camera->rotate(-camera_vel *dt);
-	if (g_InputHandler->IsKeyPressed(Keys::E))
 		camera->rotate(camera_vel *dt);
+	if (g_InputHandler->IsKeyPressed(Keys::E))
+		camera->rotate(-camera_vel *dt);
 
 	angle += angle_vel * dt;
 	Mtyre = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
