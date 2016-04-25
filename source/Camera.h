@@ -40,27 +40,19 @@ public:
 
 	void moveForward(const vec3f& v)
 	{
-		mat4f R, T, S, C, M, F;
-		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
-		T = mat4f::translation(position);
-		S = mat4f::scaling(1, 1, 1);
-		M = T * R; // *S;
-		C = mat4f(v.x, v.y, v.z, 0);//(0, 0, -1, 0);
+		mat4f M, F, C;
+		M = get_ViewToWorldMatrix();
+		C = mat4f(v.x, v.y, v.z, 0);
 		F = M * C;
-		//M.operator*(vec4f(0, 0, -1, 0));//vec4f(v.x, v.y, v.z, 0));
 
 		position += vec3f(F.col[2].x, F.col[2].y, F.col[2].z);
 
-		int i = 1;
-		//position += v;
 	}
 
 	void moveSide(const vec3f& v)
 	{
-		mat4f R, T, S, C, M, F;
-		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
-		T = mat4f::translation(position);
-		M = T * R;
+		mat4f M, F, C;
+		M = get_ViewToWorldMatrix();
 		C = mat4f(v.x, v.y, v.z, 0);
 		F = M * C;
 
@@ -70,10 +62,8 @@ public:
 
 	void moveUpDown(const vec3f& v)
 	{
-		mat4f R, T, S, C, M, F;
-		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
-		T = mat4f::translation(position);
-		M = T * R;
+		mat4f M, F, C;
+		M = get_ViewToWorldMatrix();
 		C = mat4f(v.x, v.y, v.z, 0);
 		F = M * C;
 
@@ -86,6 +76,16 @@ public:
 		angle += v;
 	}
 
+
+	mat4f get_ViewToWorldMatrix() const
+	{
+		mat4f R, T, S, C, M, F;
+		R = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
+		T = mat4f::translation(position);
+		M = T * R;
+		return M;
+	}
+
 	mat4f get_WorldToViewMatrix() const
 	{
 		mat4f T, R, S, M;
@@ -93,10 +93,6 @@ public:
 		T = mat4f::translation(-position);
 		M = R * T;
 		return M;
-		/*view.rotation =*/ //mat4f::rotation(0.2f, 0.0f, 1.0f, 0.0f);
-
-		//return view.translation(-position);
-		//return mat4f::translation(-position); // *mat4f::rotation(angle, 1.0f, 0.0f, 0.0f);
 	}
 
 	mat4f get_ProjectionMatrix() const
