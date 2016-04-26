@@ -120,7 +120,7 @@ void renderObjects()
 	cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
 	cube->render(g_DeviceContext);
 	
-	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre, Mview, Mproj);
+	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre * Mquad, Mview, Mproj);
 	obj->render(g_DeviceContext);
 }
 
