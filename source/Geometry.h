@@ -40,6 +40,11 @@ public:
 		mat4f WorldToViewMatrix,
 		mat4f ProjectionMatrix);
 
+	virtual void MapMaterialBuffers(
+		ID3D11DeviceContext* device_context,
+		ID3D11Buffer* matrix_buffer,
+		vec4f Color);
+
 	virtual void render(ID3D11DeviceContext* device_context) const = 0;
 
 	virtual ~Geometry_t()

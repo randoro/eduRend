@@ -1,4 +1,11 @@
 
+
+cbuffer MaterialBuffer : register(b0)
+{
+	float4 color;
+};
+
+
 struct PSIn
 {
 	float4 Pos  : SV_Position;
@@ -11,6 +18,7 @@ struct PSIn
 //-----------------------------------------------------------------------------------------
 float4 PS_main(PSIn input) : SV_Target
 {	
-	return float4(input.Normal*0.5+0.5, 1);
+	//return float4(input.Normal*0.5+0.5, 1);
+	return color;
 	//return float4(input.TexCoord,0,1);
 }

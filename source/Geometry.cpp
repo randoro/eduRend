@@ -20,6 +20,20 @@ void Geometry_t::MapMatrixBuffers(
 }
 
 
+void Geometry_t::MapMaterialBuffers(
+	ID3D11DeviceContext* device_context,
+	ID3D11Buffer* matrix_buffer,
+	vec4f Color)
+{
+	// map the resource buffer, obtain a pointer to it and then write our matrices to it
+	D3D11_MAPPED_SUBRESOURCE resource;
+	device_context->Map(matrix_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+	MaterialBuffer_t* matrix_buffer_ = (MaterialBuffer_t*)resource.pData;
+	matrix_buffer_->Color = { 1, 0, 0, 1 };
+	device_context->Unmap(matrix_buffer, 0);
+}
+
+
 Quad_t::Quad_t(ID3D11Device* device)
 {
 	// populate the vertex array with 4 vertices

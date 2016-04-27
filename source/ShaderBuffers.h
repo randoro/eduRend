@@ -16,3 +16,18 @@ struct MatrixBuffer_t
 };
 
 #endif
+
+#ifndef MATERIALBUFFERS_H
+#define MATERIALBUFFERS_H
+
+#include "vec\vec.h"
+#include "vec\mat.h"
+
+using namespace linalg;
+
+struct MaterialBuffer_t
+{
+	vec4f Color;
+};
+
+#endif

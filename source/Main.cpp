@@ -27,6 +27,7 @@ ID3D11VertexShader*		g_VertexShader			= nullptr;
 ID3D11PixelShader*		g_PixelShader			= nullptr;
 
 ID3D11Buffer*			g_MatrixBuffer = nullptr;
+ID3D11Buffer*			g_MaterialBuffer = nullptr;
 InputHandler*			g_InputHandler = nullptr;
 
 int width, height;
@@ -117,10 +118,13 @@ void renderObjects()
 	Mview = camera->get_WorldToViewMatrix();
 	Mproj = camera->get_ProjectionMatrix();
 
+	
 	cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
+	cube->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 1, 0, 0, 0 });
 	cube->render(g_DeviceContext);
 	
 	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre * Mquad, Mview, Mproj);
+	obj->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 1, 0, 0, 0 });
 	obj->render(g_DeviceContext);
 }
 
@@ -458,7 +462,17 @@ void InitShaderBuffers()
 	MatrixBuffer_desc.MiscFlags = 0;
 	MatrixBuffer_desc.StructureByteStride = 0;
 
+	// Material buffer
+	D3D11_BUFFER_DESC MaterialBuffer_desc = { 0 };
+	MaterialBuffer_desc.Usage = D3D11_USAGE_DYNAMIC;
+	MaterialBuffer_desc.ByteWidth = sizeof(MaterialBuffer_t);
+	MaterialBuffer_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	MaterialBuffer_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	MaterialBuffer_desc.MiscFlags = 0;
+	MaterialBuffer_desc.StructureByteStride = 0;
+
 	ASSERT(hr = g_Device->CreateBuffer(&MatrixBuffer_desc, nullptr, &g_MatrixBuffer));
+	ASSERT(hr = g_Device->CreateBuffer(&MaterialBuffer_desc, nullptr, &g_MaterialBuffer));
 }
 
 HRESULT CreateRenderTargetView()
@@ -551,6 +565,8 @@ HRESULT Render(float deltaTime)
 	
 	// set matrix buffers
 	g_DeviceContext->VSSetConstantBuffers(0, 1, &g_MatrixBuffer);
+
+	g_DeviceContext->PSSetConstantBuffers(0, 1, &g_MaterialBuffer);
 
 	// time to render our objects
 	renderObjects();

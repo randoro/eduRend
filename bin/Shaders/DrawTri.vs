@@ -31,8 +31,10 @@ PSIn VS_main(VSIn input)
 	
 	// model-to-view
 	matrix MV = mul(ModelToWorldMatrix, WorldToViewMatrix);
+	//matrix MV = mul(WorldToViewMatrix, ModelToWorldMatrix);
 	// model-to-projection
 	matrix MVP = mul(MV, ProjectionMatrix);
+	//matrix MVP = mul(ProjectionMatrix, MV);
 	
 	output.Pos = mul(float4(input.Pos, 1), MVP);
 	output.Normal = mul(input.Normal, MV);
