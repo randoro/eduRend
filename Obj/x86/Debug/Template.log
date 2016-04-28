@@ -1,4 +1,4 @@
-﻿Build started 2016-04-28 12:11:17.
+﻿Build started 2016-04-28 12:32:11.
      1>Project "C:\Users\Spellabbet\Documents\eduRend\source\Template.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "C:\Users\Spellabbet\Documents\eduRend\source\../Obj/x86/Debug/eduRend.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -48,4 +48,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.96
+Time Elapsed 00:00:01.37
