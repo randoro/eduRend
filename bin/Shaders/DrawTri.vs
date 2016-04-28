@@ -20,6 +20,7 @@ struct PSIn
 	float4 Pos  : SV_Position;
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;
+	float4 WorldPos : WorldPos;
 };
 
 //-----------------------------------------------------------------------------------------
@@ -30,15 +31,16 @@ PSIn VS_main(VSIn input)
 	PSIn output = (PSIn)0;
 	
 	// model-to-view
-	matrix MV = mul(ModelToWorldMatrix, WorldToViewMatrix);
-	//matrix MV = mul(WorldToViewMatrix, ModelToWorldMatrix);
+	//matrix MV = mul(ModelToWorldMatrix, WorldToViewMatrix);
+	matrix MV = mul(WorldToViewMatrix, ModelToWorldMatrix);
 	// model-to-projection
-	matrix MVP = mul(MV, ProjectionMatrix);
-	//matrix MVP = mul(ProjectionMatrix, MV);
+	//matrix MVP = mul(MV, ProjectionMatrix);
+	matrix MVP = mul(ProjectionMatrix, MV);
 	
-	output.Pos = mul(float4(input.Pos, 1), MVP);
-	output.Normal = mul(input.Normal, MV);
+	output.Pos = mul(MVP, float4(input.Pos, 1));
+	output.Normal = mul(MV, input.Normal);
 	output.TexCoord = input.TexCoord;
+	output.WorldPos = mul(MV, input.Pos);
 		
 	return output;
 }

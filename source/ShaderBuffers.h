@@ -31,3 +31,19 @@ struct MaterialBuffer_t
 };
 
 #endif
+
+#ifndef CAMERABUFFERS_H
+#define CAMERABUFFERS_H
+
+#include "vec\vec.h"
+#include "vec\mat.h"
+
+using namespace linalg;
+
+struct CameraBuffer_t
+{
+	vec4f cameraPosition;
+	vec4f lightPosition;
+};
+
+#endif

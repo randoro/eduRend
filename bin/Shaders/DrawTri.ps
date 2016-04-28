@@ -6,12 +6,37 @@ cbuffer MaterialBuffer : register(b0)
 };
 
 
+cbuffer CameraBuffer : register(b1)
+{
+	float4 cameraPosition;
+	float4 lightPosition;
+};
+
+
 struct PSIn
 {
 	float4 Pos  : SV_Position;
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;
+	float4 WorldPos : WorldPos;
 };
+
+
+//struct Material
+//{
+//	float4 Ka
+//	float3 Kd;
+//	float2 Ks;
+//};
+
+//float4 calcPhongLighting(float4 color, float3 N, float3 L, float3 V, float3 R )
+//{
+ //   float4 Ia = color * 0.8;
+//    float4 Id = 0.5 * saturate( dot(N,L) );
+ //  float4 Is = 0.3 * pow( saturate(dot(R,V)), 2 );
+ 
+ //   return Ia + (Id + Is) * { 1 , 1 , 1, 1};
+//}
 
 //-----------------------------------------------------------------------------------------
 // PixelShader: PSSceneMain
@@ -19,6 +44,34 @@ struct PSIn
 float4 PS_main(PSIn input) : SV_Target
 {	
 	//return float4(input.Normal*0.5+0.5, 1);
-	return color;
+	//float4 Direction = input.Pos - cameraPosition;
+	
+	//float4 I;
+	//I = color + lightColor* dot(input.Normal, Direction);
+	//return I; float4 lightDirr = cameraPosition - lightPosition;
 	//return float4(input.TexCoord,0,1);
+
+	
+
+	float4 lightColor = { 1, 1, 1, 1 };
+
+	//calculate lighting vectors
+    float3 N = normalize(input.Normal);
+    float3 V = normalize((float3) cameraPosition - (float3) input.WorldPos );
+	
+	float4 L = normalize(lightPosition - input.WorldPos);
+    //DONOT USE -light.dir since the reflection returns a ray from the surface
+    float3 R = reflect( (float3) L, N);
+
+	
+	float4 Ia = color * 0.8;
+    float4 Id = lightColor * dot(N,L);
+    //float4 Is = lightColor * pow( saturate(dot(R,V)), 2 );
+ 
+    return Ia + Id; //* lightColor;
+
+
+	//return calcPhongLighting(color, input.Normal, { lightPosition.x, lightPosition.y, lightPosition.z }, {0.5f, 0.5f, 0.5f }, {0.5f, 0.5f, 0.5f } );
+
 }
+

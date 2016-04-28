@@ -13,9 +13,9 @@ void Geometry_t::MapMatrixBuffers(
 	D3D11_MAPPED_SUBRESOURCE resource;
 	device_context->Map(matrix_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
 	MatrixBuffer_t* matrix_buffer_ = (MatrixBuffer_t*)resource.pData;
-	matrix_buffer_->ModelToWorldMatrix = linalg::transpose(ModelToWorldMatrix);
-	matrix_buffer_->WorldToViewMatrix = linalg::transpose(WorldToViewMatrix);
-	matrix_buffer_->ProjectionMatrix = linalg::transpose(ProjectionMatrix);
+	matrix_buffer_->ModelToWorldMatrix = ModelToWorldMatrix;//linalg::transpose(ModelToWorldMatrix);
+	matrix_buffer_->WorldToViewMatrix = WorldToViewMatrix;//linalg::transpose(WorldToViewMatrix);
+	matrix_buffer_->ProjectionMatrix = ProjectionMatrix;//linalg::transpose(ProjectionMatrix);
 	device_context->Unmap(matrix_buffer, 0);
 }
 
