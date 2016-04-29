@@ -29,7 +29,7 @@ void Geometry_t::MapMaterialBuffers(
 	D3D11_MAPPED_SUBRESOURCE resource;
 	device_context->Map(matrix_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
 	MaterialBuffer_t* matrix_buffer_ = (MaterialBuffer_t*)resource.pData;
-	matrix_buffer_->Color = { 1, 0, 0, 1 };
+	matrix_buffer_->Color = Color;
 	device_context->Unmap(matrix_buffer, 0);
 }
 
