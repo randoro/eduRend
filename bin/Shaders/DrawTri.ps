@@ -65,9 +65,9 @@ float4 PS_main(PSIn input) : SV_Target
     float3 R = reflect( (float3) L, N);
 
 	
-	float4 Ia = color * 0.8;
+	float4 Ia = color * saturate(0.8);
     float4 Id = lightColor * saturate(dot(N,L));
-    float4 Is = lightColorBlue * pow( dot(R,V), 4 );  //pow( saturate(dot(R,-V)), 12 );
+    float4 Is = lightColorBlue * saturate(pow( dot(R,V), 60 )); 
  
     return Ia + Id + Is;
 
