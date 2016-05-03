@@ -74,7 +74,7 @@ void initObjects()
 	// create camera
 	camera = new camera_t(fPI/4,				/*field-of-view*/
 						(float)width / height,	/*aspect ratio*/
-						1.0f,					/*z-near plane (everything closer will be clipped/removed)*/
+						0.1f,					/*z-near plane (everything closer will be clipped/removed)*/
 						500.0f);				/*z-far plane (everything further will be clipped/removed)*/
 	camera->moveTo({ 0, 0, 5 });
 
@@ -121,9 +121,10 @@ void renderObjects()
 
 	camera->MapCameraBuffers(g_DeviceContext, g_CameraBuffer);
 	
-	cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
+	//temp removed
+	/*cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
 	cube->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 1, 0, 0, 0 });
-	cube->render(g_DeviceContext);
+	cube->render(g_DeviceContext);*/
 	
 	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre * Mquad, Mview, Mproj);
 	obj->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 0, 0, 1, 0 });
