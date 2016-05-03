@@ -2,6 +2,26 @@
 #include "Geometry.h"
 
 
+void Geometry_t::CreateSampler(ID3D11Device* device)
+{
+	HRESULT hr;
+
+	D3D11_SAMPLER_DESC sd =
+	{
+		D3D11_FILTER_ANISOTROPIC, //Filter
+		D3D11_TEXTURE_ADDRESS_WRAP,//AddressU
+		D3D11_TEXTURE_ADDRESS_WRAP,//AddressV
+		D3D11_TEXTURE_ADDRESS_WRAP,//AddressW
+		0.0f,//MipLODBias
+		4,//MaxAnisotropy
+		D3D11_COMPARISON_NEVER,//Comparisonfunc
+		{ 1.0f, 1.0f, 1.0f, 1.0f },//BorderColor
+		-FLT_MAX,//MinLOD
+		FLT_MAX//MaxLOD
+	};
+	ASSERT(hr = device->CreateSamplerState(&sd, &SamplerState));
+}
+
 void Geometry_t::MapMatrixBuffers(
 	ID3D11DeviceContext* device_context,
 	ID3D11Buffer* matrix_buffer,
@@ -65,6 +85,9 @@ Quad_t::Quad_t(ID3D11Device* device)
 	indices.push_back(2);
 	indices.push_back(3);
 
+
+	CreateSampler(device);
+
 	// vertex array descriptor
 	D3D11_BUFFER_DESC vbufferDesc = { 0.0f };
 	vbufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -109,6 +132,9 @@ void Quad_t::render(ID3D11DeviceContext* device_context) const
 
 	// bind our index buffer
 	device_context->IASetIndexBuffer(index_buffer, DXGI_FORMAT_R32_UINT, 0);
+
+	//bind sampler
+	device_context->PSSetSamplers(0, 1, &SamplerState);
 
 	// make the drawcall
 	device_context->DrawIndexed(nbr_indices, 0, 0);
@@ -339,6 +365,10 @@ Cube_t::Cube_t(ID3D11Device* device)
 	indices.push_back(2 + offset);
 	indices.push_back(3 + offset);
 
+
+	CreateSampler(device);
+
+
 	// vertex array descriptor
 	D3D11_BUFFER_DESC vbufferDesc = { 0.0f };
 	vbufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -387,6 +417,10 @@ void Cube_t::render(ID3D11DeviceContext* device_context) const
 	// bind our index buffer
 	device_context->IASetIndexBuffer(index_buffer, DXGI_FORMAT_R32_UINT, 0);
 
+
+	//bind sampler
+	device_context->PSSetSamplers(0, 1, &SamplerState);
+
 	// make the drawcall
 	device_context->DrawIndexed(nbr_indices, 0, 0);
 }
@@ -421,6 +455,9 @@ OBJModel_t::OBJModel_t(
 		i_ofs = indices.size();
 	}
 
+
+	CreateSampler(device);
+
 	// vertex array descriptor
 	D3D11_BUFFER_DESC vbufferDesc = { 0.0f };
 	vbufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -450,6 +487,9 @@ OBJModel_t::OBJModel_t(
 	// copy materials from mesh
 	append_materials(mesh->materials);
 
+
+
+
 	// load textures associated with materials to device
 	for (auto& mtl : materials)
 	{
@@ -458,6 +498,7 @@ OBJModel_t::OBJModel_t(
 
 		// Kd_map
 		if (mtl.map_Kd.size()) {
+			//wstr = L"../ ../assets/textures/crate.png";
 			wstr = std::wstring(mtl.map_Kd.begin(), mtl.map_Kd.end());
 			hr = DirectX::CreateWICTextureFromFile(device, wstr.c_str(), &mtl.map_Kd_Tex, &mtl.map_Kd_TexSRV);
 			printf("loading texture %s - %s\n", mtl.map_Kd.c_str(), SUCCEEDED(hr) ? "OK" : "FAILED");
@@ -490,6 +531,9 @@ void OBJModel_t::render(ID3D11DeviceContext* device_context) const
 		// fetch material and bind texture
 		const material_t& mtl = materials[irange.mtl_index];
 		device_context->PSSetShaderResources(0, 1, &mtl.map_Kd_TexSRV);
+
+		//bind sampler
+		device_context->PSSetSamplers(0, 1, &SamplerState);
 
 		// make the drawcall
 		device_context->DrawIndexed(irange.size, irange.start, 0);

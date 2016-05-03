@@ -25,6 +25,9 @@ protected:
 	// pointers to device vertex & index arrays
 	ID3D11Buffer* vertex_buffer = nullptr;
 	ID3D11Buffer* index_buffer = nullptr;
+	//pointers to material buffer and texture sampler
+	ID3D11Buffer* MaterialBuffer = nullptr;
+	ID3D11SamplerState* SamplerState = nullptr;
 
 public:
 
@@ -33,6 +36,8 @@ public:
 	//
 	// Map and update the matrix buffer
 	//
+	void CreateSampler(ID3D11Device* device);
+
 	virtual void MapMatrixBuffers(
 		ID3D11DeviceContext* device_context,
 		ID3D11Buffer* matrix_buffer,

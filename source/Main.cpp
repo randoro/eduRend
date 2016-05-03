@@ -80,7 +80,7 @@ void initObjects()
 
 	// create objects
 	cube = new Cube_t(g_Device);
-	obj = new OBJModel_t("../../assets/tyre/Tyre.obj", g_Device);
+	obj = new OBJModel_t("../../assets/hand/hand.obj", g_Device);
 }
 
 //
