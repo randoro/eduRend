@@ -60,6 +60,7 @@ public:
 	}
 };
 
+
 class Quad_t : public Geometry_t
 {
 	// our local vertex and index arrays
@@ -83,6 +84,7 @@ class Cube_t : public Geometry_t
 	std::vector<vertex_t> vertices;
 	std::vector<unsigned> indices;
 	unsigned nbr_indices = 0;
+
 
 public:
 

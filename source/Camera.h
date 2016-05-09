@@ -42,6 +42,7 @@ public:
 		D3D11_MAPPED_SUBRESOURCE resource;
 		device_context->Map(camera_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
 		CameraBuffer_t* camera_buffer_ = (CameraBuffer_t*)resource.pData;
+
 		camera_buffer_->cameraPosition = { position.x, position.y, position.z, 0 };
 		device_context->Unmap(camera_buffer, 0);
 	}

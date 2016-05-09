@@ -82,11 +82,11 @@ void initObjects()
 	camera->moveTo({ 0, 0, 5 });
 
 	pointlight = new pointlight_t();
-	pointlight->moveTo({ 0, 0, 0 });
+	pointlight->moveTo({ 0, 5, 0 });
 
 	// create objects
 	cube = new Cube_t(g_Device);
-	obj = new OBJModel_t("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
+	obj = new OBJModel_t("../../assets/sphere/sphere.obj", g_Device); //("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
 }
 
 //
@@ -145,11 +145,11 @@ void renderObjects()
 	pointlight->MapLightBuffers(g_DeviceContext, g_LightBuffer);
 	
 	//temp removed
-	/*cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
-	cube->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 1, 0, 0, 0 });
-	cube->render(g_DeviceContext);*/
+	//cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
+	//cube->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 1, 0, 0, 0 });
+	//cube->render(g_DeviceContext);
 	
-	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre * Mquad, Mview, Mproj);
+	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre, Mview, Mproj);
 	obj->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 0, 0, 0, 0 });
 	obj->render(g_DeviceContext);
 }
@@ -614,9 +614,9 @@ HRESULT Render(float deltaTime)
 
 	g_DeviceContext->PSSetConstantBuffers(0, 1, &g_MaterialBuffer);
 
-	g_DeviceContext->PSSetConstantBuffers(1, 1, &g_CameraBuffer);
+	g_DeviceContext->VSSetConstantBuffers(1, 1, &g_CameraBuffer);
 
-	g_DeviceContext->PSSetConstantBuffers(2, 1, &g_LightBuffer);
+	g_DeviceContext->VSSetConstantBuffers(2, 1, &g_LightBuffer);
 
 	// time to render our objects
 	renderObjects();

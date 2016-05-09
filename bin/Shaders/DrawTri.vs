@@ -6,6 +6,16 @@ cbuffer MatrixBuffer : register(b0)
 	matrix ProjectionMatrix;
 };
 
+cbuffer CameraBuffer : register(b1)
+{
+	float4 cameraPosition;
+};
+
+cbuffer LightBuffer : register(b2)
+{
+	float4 lightPosition;
+};
+
 struct VSIn
 {
 	float3 Pos : POSITION;
@@ -21,6 +31,8 @@ struct PSIn
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;
 	float4 WorldPos : WorldPos;
+	float4 CameraPos : CameraPos;
+	float4 LightPos : LightPos;
 };
 
 //-----------------------------------------------------------------------------------------
@@ -41,6 +53,8 @@ PSIn VS_main(VSIn input)
 	output.Normal = mul(MV, input.Normal);
 	output.TexCoord = input.TexCoord;
 	output.WorldPos = mul(MV, input.Pos);
-		
+	output.CameraPos = cameraPosition;
+	output.LightPos = lightPosition;
+
 	return output;
 }
