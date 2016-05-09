@@ -6,6 +6,7 @@
 #include "ShaderBuffers.h"
 #include "InputHandler.h"
 #include "Camera.h"
+#include "PointLight.h"
 #include "Geometry.h"
 
 //--------------------------------------------------------------------------------------
@@ -29,6 +30,7 @@ ID3D11PixelShader*		g_PixelShader			= nullptr;
 ID3D11Buffer*			g_MatrixBuffer = nullptr;
 ID3D11Buffer*			g_MaterialBuffer = nullptr;
 ID3D11Buffer*			g_CameraBuffer = nullptr;
+ID3D11Buffer*			g_LightBuffer = nullptr;
 InputHandler*			g_InputHandler = nullptr;
 
 int width, height;
@@ -53,6 +55,7 @@ void				Release();
 // object declarations
 //
 camera_t* camera;
+pointlight_t* pointlight;
 float camera_vel = 1.5f;	// world unit/s
 Cube_t* cube;
 OBJModel_t* obj;
@@ -78,9 +81,12 @@ void initObjects()
 						500.0f);				/*z-far plane (everything further will be clipped/removed)*/
 	camera->moveTo({ 0, 0, 5 });
 
+	pointlight = new pointlight_t();
+	pointlight->moveTo({ 0, 0, 0 });
+
 	// create objects
 	cube = new Cube_t(g_Device);
-	obj = new OBJModel_t("../../assets/hand/hand.obj", g_Device);
+	obj = new OBJModel_t("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
 }
 
 //
@@ -89,13 +95,13 @@ void initObjects()
 void updateObjects(float dt)
 {
 	// basic camera control
-	if (g_InputHandler->IsKeyPressed(Keys::Up) || g_InputHandler->IsKeyPressed(Keys::W))
+	if (g_InputHandler->IsKeyPressed(Keys::W))
 		camera->moveForward({ 0.0f, 0.0f, -camera_vel *dt });
-	if (g_InputHandler->IsKeyPressed(Keys::Down) || g_InputHandler->IsKeyPressed(Keys::S))
+	if (g_InputHandler->IsKeyPressed(Keys::S))
 		camera->moveForward({ 0.0f, 0.0f, camera_vel *dt });
-	if (g_InputHandler->IsKeyPressed(Keys::Right) || g_InputHandler->IsKeyPressed(Keys::D))
+	if (g_InputHandler->IsKeyPressed(Keys::D))
 		camera->moveSide({ camera_vel *dt, 0.0f, 0.0f });
-	if (g_InputHandler->IsKeyPressed(Keys::Left) || g_InputHandler->IsKeyPressed(Keys::A))
+	if (g_InputHandler->IsKeyPressed(Keys::A))
 		camera->moveSide({ -camera_vel *dt, 0.0f, 0.0f });
 	if (g_InputHandler->IsKeyPressed(Keys::Space))
 		camera->moveUpDown({ 0.0f, camera_vel *dt, 0.0f });
@@ -105,6 +111,21 @@ void updateObjects(float dt)
 		camera->rotate(camera_vel *dt);
 	if (g_InputHandler->IsKeyPressed(Keys::E))
 		camera->rotate(-camera_vel *dt);
+
+	// basic camera control
+	if (g_InputHandler->IsKeyPressed(Keys::Up))
+		pointlight->moveForward({ 0.0f, 0.0f, -camera_vel *dt });
+	if (g_InputHandler->IsKeyPressed(Keys::Down))
+		pointlight->moveForward({ 0.0f, 0.0f, camera_vel *dt });
+	if (g_InputHandler->IsKeyPressed(Keys::Right))
+		pointlight->moveSide({ camera_vel *dt, 0.0f, 0.0f });
+	if (g_InputHandler->IsKeyPressed(Keys::Left))
+		pointlight->moveSide({ -camera_vel *dt, 0.0f, 0.0f });
+	if (g_InputHandler->IsKeyPressed(Keys::Enter))
+		pointlight->moveUpDown({ 0.0f, camera_vel *dt, 0.0f });
+	if (g_InputHandler->IsKeyPressed(Keys::BackSpace))
+		pointlight->moveUpDown({ 0.0f, -camera_vel *dt, 0.0f });
+
 
 	angle += angle_vel * dt;
 	Mtyre = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
@@ -120,6 +141,8 @@ void renderObjects()
 	Mproj = camera->get_ProjectionMatrix();
 
 	camera->MapCameraBuffers(g_DeviceContext, g_CameraBuffer);
+
+	pointlight->MapLightBuffers(g_DeviceContext, g_LightBuffer);
 	
 	//temp removed
 	/*cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
@@ -127,7 +150,7 @@ void renderObjects()
 	cube->render(g_DeviceContext);*/
 	
 	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre * Mquad, Mview, Mproj);
-	obj->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 0, 0, 1, 0 });
+	obj->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 0, 0, 0, 0 });
 	obj->render(g_DeviceContext);
 }
 
@@ -483,9 +506,19 @@ void InitShaderBuffers()
 	CameraBuffer_desc.MiscFlags = 0;
 	CameraBuffer_desc.StructureByteStride = 0;
 
+	// Light buffer
+	D3D11_BUFFER_DESC LightBuffer_desc = { 0 };
+	LightBuffer_desc.Usage = D3D11_USAGE_DYNAMIC;
+	LightBuffer_desc.ByteWidth = sizeof(LightBuffer_t);
+	LightBuffer_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	LightBuffer_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	LightBuffer_desc.MiscFlags = 0;
+	LightBuffer_desc.StructureByteStride = 0;
+
 	ASSERT(hr = g_Device->CreateBuffer(&MatrixBuffer_desc, nullptr, &g_MatrixBuffer));
 	ASSERT(hr = g_Device->CreateBuffer(&MaterialBuffer_desc, nullptr, &g_MaterialBuffer)); 
 	ASSERT(hr = g_Device->CreateBuffer(&CameraBuffer_desc, nullptr, &g_CameraBuffer));
+	ASSERT(hr = g_Device->CreateBuffer(&LightBuffer_desc, nullptr, &g_LightBuffer));
 }
 
 HRESULT CreateRenderTargetView()
@@ -582,6 +615,8 @@ HRESULT Render(float deltaTime)
 	g_DeviceContext->PSSetConstantBuffers(0, 1, &g_MaterialBuffer);
 
 	g_DeviceContext->PSSetConstantBuffers(1, 1, &g_CameraBuffer);
+
+	g_DeviceContext->PSSetConstantBuffers(2, 1, &g_LightBuffer);
 
 	// time to render our objects
 	renderObjects();

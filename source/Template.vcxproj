@@ -194,6 +194,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="parseutil.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="ShaderBuffers.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="vec\mat.h" />

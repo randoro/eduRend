@@ -69,6 +69,7 @@
     <ClInclude Include="mesh.h">
       <Filter>Source Files\aux</Filter>
     </ClInclude>
+    <ClInclude Include="PointLight.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Bin\Shaders\DrawTri.ps">

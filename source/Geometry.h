@@ -31,7 +31,7 @@ protected:
 
 public:
 
-	Geometry_t() { }
+	Geometry_t(ID3D11Device* device);
 
 	//
 	// Map and update the matrix buffer

@@ -2,6 +2,13 @@
 #include "Geometry.h"
 
 
+Geometry_t::Geometry_t(ID3D11Device* device)
+{
+	CreateSampler(device);
+}
+
+
+
 void Geometry_t::CreateSampler(ID3D11Device* device)
 {
 	HRESULT hr;
@@ -54,7 +61,7 @@ void Geometry_t::MapMaterialBuffers(
 }
 
 
-Quad_t::Quad_t(ID3D11Device* device)
+Quad_t::Quad_t(ID3D11Device* device) : Geometry_t(device)
 {
 	// populate the vertex array with 4 vertices
 	vertex_t v0, v1, v2, v3;
@@ -86,7 +93,6 @@ Quad_t::Quad_t(ID3D11Device* device)
 	indices.push_back(3);
 
 
-	CreateSampler(device);
 
 	// vertex array descriptor
 	D3D11_BUFFER_DESC vbufferDesc = { 0.0f };
@@ -141,7 +147,7 @@ void Quad_t::render(ID3D11DeviceContext* device_context) const
 }
 
 
-Cube_t::Cube_t(ID3D11Device* device)
+Cube_t::Cube_t(ID3D11Device* device) : Geometry_t(device)
 {
 	// populate the vertex array with 4 vertices
 	vec3f vPos0, vPos1, vPos2, vPos3, vPos4, vPos5, vPos6, vPos7;
@@ -366,8 +372,6 @@ Cube_t::Cube_t(ID3D11Device* device)
 	indices.push_back(3 + offset);
 
 
-	CreateSampler(device);
-
 
 	// vertex array descriptor
 	D3D11_BUFFER_DESC vbufferDesc = { 0.0f };
@@ -428,7 +432,7 @@ void Cube_t::render(ID3D11DeviceContext* device_context) const
 
 OBJModel_t::OBJModel_t(
 	const std::string& objfile,
-	ID3D11Device* device)
+	ID3D11Device* device) : Geometry_t(device)
 {
 	//
 	// load the OBJ
@@ -455,8 +459,6 @@ OBJModel_t::OBJModel_t(
 		i_ofs = indices.size();
 	}
 
-
-	CreateSampler(device);
 
 	// vertex array descriptor
 	D3D11_BUFFER_DESC vbufferDesc = { 0.0f };

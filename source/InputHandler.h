@@ -19,7 +19,9 @@ enum Keys {
 	Space = DIK_SPACE,
 	Shift = DIK_LSHIFT,
 	Q = DIK_Q,
-	E = DIK_E
+	E = DIK_E,
+	Enter = DIK_RETURN,
+	BackSpace = DIK_BACKSPACE
 };
 
 class InputHandler {
