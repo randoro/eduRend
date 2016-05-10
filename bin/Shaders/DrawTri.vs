@@ -45,6 +45,7 @@ PSIn VS_main(VSIn input)
 	// model-to-view
 	//matrix MV = mul(ModelToWorldMatrix, WorldToViewMatrix);
 	matrix MV = mul(WorldToViewMatrix, ModelToWorldMatrix);
+	matrix VM = mul(ModelToWorldMatrix, WorldToViewMatrix);
 	// model-to-projection
 	//matrix MVP = mul(MV, ProjectionMatrix);
 	matrix MVP = mul(ProjectionMatrix, MV);
@@ -53,8 +54,8 @@ PSIn VS_main(VSIn input)
 	output.Normal = mul(MV, input.Normal);
 	output.TexCoord = input.TexCoord;
 	output.WorldPos = mul(MV, input.Pos);
-	output.CameraPos = cameraPosition;
-	output.LightPos = lightPosition;
+	output.CameraPos = mul(WorldToViewMatrix, cameraPosition);
+	output.LightPos =  mul(WorldToViewMatrix, lightPosition);
 
 	return output;
 }

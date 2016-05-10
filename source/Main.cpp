@@ -82,11 +82,12 @@ void initObjects()
 	camera->moveTo({ 0, 0, 5 });
 
 	pointlight = new pointlight_t();
-	pointlight->moveTo({ 0, 5, 0 });
+	pointlight->moveTo({ 0, 5, 5 });
 
 	// create objects
 	cube = new Cube_t(g_Device);
-	obj = new OBJModel_t("../../assets/sphere/sphere.obj", g_Device); //("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
+	obj = new OBJModel_t("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
+	//("../../assets/sphere/sphere.obj", g_Device);
 }
 
 //
