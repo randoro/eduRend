@@ -86,7 +86,9 @@ void initObjects()
 
 	// create objects
 	cube = new Cube_t(g_Device);
-	obj = new OBJModel_t("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
+	//obj = new OBJModel_t("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
+	obj = new OBJModel_t("../../assets/city/city.obj", g_Device);
+	//("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
 	//("../../assets/sphere/sphere.obj", g_Device);
 }
 
@@ -129,8 +131,8 @@ void updateObjects(float dt)
 
 
 	angle += angle_vel * dt;
-	Mtyre = mat4f::rotation(angle, 0.0f, 1.0f, 0.0f);
-	Mquad = mat4f::rotation(-angle, 0.0f, 1.0f, 0.0f);
+	Mtyre = mat4f::rotation(0, 0.0f, 1.0f, 0.0f);
+	Mquad = mat4f::rotation(0, 0.0f, 1.0f, 0.0f);
 }
 
 //

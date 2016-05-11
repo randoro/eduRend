@@ -50,9 +50,11 @@ PSIn VS_main(VSIn input)
 	//matrix MVP = mul(MV, ProjectionMatrix);
 	matrix MVP = mul(ProjectionMatrix, MV);
 	
+	float2 inv = { input.TexCoord.x, -input.TexCoord.y };
+
 	output.Pos = mul(MVP, float4(input.Pos, 1));
 	output.Normal = mul(MV, input.Normal);
-	output.TexCoord = input.TexCoord;
+	output.TexCoord = inv;
 	output.WorldPos = mul(MV, input.Pos);
 	output.CameraPos = mul(WorldToViewMatrix, cameraPosition);
 	output.LightPos =  mul(WorldToViewMatrix, lightPosition);

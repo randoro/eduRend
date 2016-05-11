@@ -1,4 +1,4 @@
-﻿Build started 2016-05-10 17:04:06.
+﻿Build started 2016-05-11 22:16:24.
      1>Project "D:\SourceTree\eduRend\source\Template.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\DirectXTK\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"D:\SourceTree\eduRend\source\../Obj/x86/Debug/" /Fd"D:\SourceTree\eduRend\source\../Obj/x86/Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
@@ -11,11 +11,11 @@
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
      1>d:\sourcetree\edurend\source\mesh.h(68): warning C4018: '<' : signed/unsigned mismatch
      1>d:\sourcetree\edurend\source\mesh.h(71): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\sourcetree\edurend\source\main.cpp(177): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
-     1>d:\sourcetree\edurend\source\main.cpp(178): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
      1>d:\sourcetree\edurend\source\main.cpp(179): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
+     1>d:\sourcetree\edurend\source\main.cpp(180): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
+     1>d:\sourcetree\edurend\source\main.cpp(181): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
      1>d:\sourcetree\edurend\source\vec\mat.h(526): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
                  d:\sourcetree\edurend\source\vec\mat.h(523) : while compiling class template member function 'linalg::mat4<float> linalg::mat4<float>::rotation(const T &,const T &,const T &,const T &)'
@@ -43,4 +43,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.12
+Time Elapsed 00:00:01.56
