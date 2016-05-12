@@ -86,8 +86,8 @@ void initObjects()
 
 	// create objects
 	cube = new Cube_t(g_Device);
-	//obj = new OBJModel_t("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
-	obj = new OBJModel_t("../../assets/city/city.obj", g_Device);
+	obj = new OBJModel_t("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
+	//obj = new OBJModel_t("../../assets/city/city.obj", g_Device);
 	//("../../assets/WoodenCrate/WoodenCrate.obj", g_Device);
 	//("../../assets/sphere/sphere.obj", g_Device);
 }
