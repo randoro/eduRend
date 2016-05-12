@@ -500,10 +500,16 @@ OBJModel_t::OBJModel_t(
 
 		// Kd_map
 		if (mtl.map_Kd.size()) {
-			//wstr = L"../ ../assets/textures/crate.png";
 			wstr = std::wstring(mtl.map_Kd.begin(), mtl.map_Kd.end());
 			hr = DirectX::CreateWICTextureFromFile(device, wstr.c_str(), &mtl.map_Kd_Tex, &mtl.map_Kd_TexSRV);
 			printf("loading texture %s - %s\n", mtl.map_Kd.c_str(), SUCCEEDED(hr) ? "OK" : "FAILED");
+			hr = DirectX::CreateWICTextureFromFile(device, wstr.c_str(), &mtl.map_bump_Tex, &mtl.map_bump_TexSRV);
+		}
+
+		if (mtl.map_bump.size()) {
+			wstr = std::wstring(mtl.map_bump.begin(), mtl.map_bump.end());
+			hr = DirectX::CreateWICTextureFromFile(device, wstr.c_str(), &mtl.map_bump_Tex, &mtl.map_bump_TexSRV);
+			printf("loading texture %s - %s\n", mtl.map_bump.c_str(), SUCCEEDED(hr) ? "OK" : "FAILED");
 		}
 
 		// other maps here...
