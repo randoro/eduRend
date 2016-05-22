@@ -1,95 +1,7 @@
-﻿Build started 2016-05-12 12:32:53.
+﻿Build started 2016-05-22 15:55:25.
      1>Project "D:\SourceTree\eduRend\source\Template.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\DirectXTK\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"D:\SourceTree\eduRend\source\../Obj/x86/Debug/" /Fd"D:\SourceTree\eduRend\source\../Obj/x86/Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Geometry.cpp InputHandler.cpp Main.cpp mesh.cpp vec\mat.cpp vec\vec.cpp
-         mesh.cpp
-         c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\sourcetree\edurend\source\file_rw.h(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-     1>d:\sourcetree\edurend\source\file_rw.h(58): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-     1>d:\sourcetree\edurend\source\mesh.h(68): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\sourcetree\edurend\source\mesh.h(71): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\sourcetree\edurend\source\mesh.cpp(32): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(46): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(55): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(64): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(73): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(77): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(81): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(29): warning C4101: 'str1' : unreferenced local variable
-     1>d:\sourcetree\edurend\source\mesh.cpp(119): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(125): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(134): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(140): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(152): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(158): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(164): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(170): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(176): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(186): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(192): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(202): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(208): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(218): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(224): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(234): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>d:\sourcetree\edurend\source\mesh.cpp(251): warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\sourcetree\edurend\source\mesh.cpp(252): warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\sourcetree\edurend\source\vec\vec.h(479): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-                 d:\sourcetree\edurend\source\mesh.h(58) : see reference to function template instantiation 'linalg::vec3<float> linalg::normalize<float>(const linalg::vec3<float> &)' being compiled
-         Main.cpp
-         c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\sourcetree\edurend\source\vec\math.h(48): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
-     1>d:\sourcetree\edurend\source\file_rw.h(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-     1>d:\sourcetree\edurend\source\file_rw.h(58): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-     1>d:\sourcetree\edurend\source\mesh.h(68): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\sourcetree\edurend\source\mesh.h(71): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\sourcetree\edurend\source\main.cpp(179): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
-     1>d:\sourcetree\edurend\source\main.cpp(180): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
-     1>d:\sourcetree\edurend\source\main.cpp(181): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
-     1>d:\sourcetree\edurend\source\vec\mat.h(526): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-                 d:\sourcetree\edurend\source\vec\mat.h(523) : while compiling class template member function 'linalg::mat4<float> linalg::mat4<float>::rotation(const T &,const T &,const T &,const T &)'
-                 with
-                 [
-                     T=float
-                 ]
-                 d:\sourcetree\edurend\source\camera.h(98) : see reference to function template instantiation 'linalg::mat4<float> linalg::mat4<float>::rotation(const T &,const T &,const T &,const T &)' being compiled
-                 with
-                 [
-                     T=float
-                 ]
-                 d:\sourcetree\edurend\source\vec\mat.h(660) : see reference to class template instantiation 'linalg::mat4<float>' being compiled
-     1>d:\sourcetree\edurend\source\vec\vec.h(479): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-                 d:\sourcetree\edurend\source\mesh.h(58) : see reference to function template instantiation 'linalg::vec3<float> linalg::normalize<float>(const linalg::vec3<float> &)' being compiled
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\DirectXTK\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"D:\SourceTree\eduRend\source\../Obj/x86/Debug/" /Fd"D:\SourceTree\eduRend\source\../Obj/x86/Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Geometry.cpp InputHandler.cpp vec\mat.cpp vec\vec.cpp
          Geometry.cpp
          c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
      1>d:\sourcetree\edurend\source\vec\math.h(48): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
@@ -103,8 +15,8 @@
      1>d:\sourcetree\edurend\source\geometry.cpp(111): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
      1>d:\sourcetree\edurend\source\geometry.cpp(377): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
      1>d:\sourcetree\edurend\source\geometry.cpp(390): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
-     1>d:\sourcetree\edurend\source\geometry.cpp(464): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
-     1>d:\sourcetree\edurend\source\geometry.cpp(477): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(476): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(489): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
      1>d:\sourcetree\edurend\source\vec\vec.h(479): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
                  d:\sourcetree\edurend\source\mesh.h(58) : see reference to function template instantiation 'linalg::vec3<float> linalg::normalize<float>(const linalg::vec3<float> &)' being compiled
          Generating Code...
@@ -119,12 +31,9 @@
          D:\SourceTree\eduRend\source\../Obj/x86/Debug/Main.obj
          D:\SourceTree\eduRend\source\../Obj/x86/Debug/mat.obj
          D:\SourceTree\eduRend\source\../Obj/x86/Debug/vec.obj
-     1>Geometry.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-     1>DirectXTK.lib(pch.obj) : warning LNK4099: PDB 'directxtk.pdb' was not found with 'DirectXTK.lib(pch.obj)' or at 'D:\SourceTree\eduRend\Bin\x86\directxtk.pdb'; linking object as if no debug info
-     1>DirectXTK.lib(WICTextureLoader.obj) : warning LNK4099: PDB 'directxtk.pdb' was not found with 'DirectXTK.lib(WICTextureLoader.obj)' or at 'D:\SourceTree\eduRend\Bin\x86\directxtk.pdb'; linking object as if no debug info
          Template.vcxproj -> D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.exe
      1>Done Building Project "D:\SourceTree\eduRend\source\Template.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:05.07
+Time Elapsed 00:00:01.34

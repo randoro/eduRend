@@ -52,6 +52,9 @@ public:
 
 	virtual void render(ID3D11DeviceContext* device_context) const = 0;
 
+
+	void compute_tangentspace(vertex_t& v0, vertex_t& v1, vertex_t& v2);
+
 	virtual ~Geometry_t()
 	{ 
 		// release the Krak-..device buffers

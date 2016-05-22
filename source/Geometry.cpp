@@ -440,6 +440,13 @@ OBJModel_t::OBJModel_t(
 	mesh_t* mesh = new mesh_t();
 	mesh->load_obj(objfile);
 
+
+	for (auto& dc : mesh->vertices)
+	{
+		int i = 1;
+	}
+
+
 	// load and organize indices in ranges per drawcall (material)
 	//
 	std::vector<unsigned> indices;
@@ -448,8 +455,13 @@ OBJModel_t::OBJModel_t(
 	for (auto& dc : mesh->drawcalls)
 	{
 		// append the drawcall indices
-		for (auto& tri : dc.tris)
-			indices.insert(indices.end(), tri.vi, tri.vi + 3);
+		for (auto& tri : dc.tris) 
+		{
+			compute_tangentspace(mesh->vertices[tri.vi[0]], mesh->vertices[tri.vi[1]], mesh->vertices[tri.vi[2]]);
+
+
+			indices.insert(indices.end(), tri.vi, (tri.vi + 3));
+		}
 
 		// create a range
 		size_t i_size = dc.tris.size() * 3;
@@ -546,4 +558,11 @@ void OBJModel_t::render(ID3D11DeviceContext* device_context) const
 		// make the drawcall
 		device_context->DrawIndexed(irange.size, irange.start, 0);
 	}
+}
+
+
+void Geometry_t::compute_tangentspace(vertex_t& v0, vertex_t& v1, vertex_t& v2)
+{
+
+
 }
