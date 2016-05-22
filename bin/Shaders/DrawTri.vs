@@ -31,6 +31,8 @@ struct PSIn
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;
 	float4 WorldPos : WorldPos;
+	float3 Tangent : TANGENT;
+	float3 Binormal : BINORMAL;
 	float4 CameraPos : CameraPos;
 	float4 LightPos : LightPos;
 };
@@ -50,11 +52,13 @@ PSIn VS_main(VSIn input)
 	//matrix MVP = mul(MV, ProjectionMatrix);
 	matrix MVP = mul(ProjectionMatrix, MV);
 	
-	float2 inv = { input.TexCoord.x, -input.TexCoord.y };
+	//float2 inv = { input.TexCoord.x, -input.TexCoord.y };
 
 	output.Pos = mul(MVP, float4(input.Pos, 1));
 	output.Normal = mul(MV, input.Normal);
-	output.TexCoord = inv;
+	output.Tangent = mul(MV, input.Tangent);
+	output.Binormal = mul(MV, input.Binormal);
+	output.TexCoord = input.TexCoord;
 	output.WorldPos = mul(MV, input.Pos);
 	output.CameraPos = mul(WorldToViewMatrix, cameraPosition);
 	output.LightPos =  mul(WorldToViewMatrix, lightPosition);
