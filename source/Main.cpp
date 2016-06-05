@@ -30,7 +30,6 @@ ID3D11PixelShader*		g_PixelShader			= nullptr;
 ID3D11Buffer*			g_MatrixBuffer = nullptr;
 ID3D11Buffer*			g_MaterialBuffer = nullptr;
 ID3D11Buffer*			g_CameraBuffer = nullptr;
-ID3D11Buffer*			g_LightBuffer = nullptr;
 InputHandler*			g_InputHandler = nullptr;
 
 int width, height;
@@ -145,7 +144,7 @@ void renderObjects()
 
 	camera->MapCameraBuffers(g_DeviceContext, g_CameraBuffer);
 
-	pointlight->MapLightBuffers(g_DeviceContext, g_LightBuffer);
+	pointlight->MapLightBuffers(g_DeviceContext, g_CameraBuffer);
 	
 	//temp removed
 	//cube->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mquad, Mview, Mproj);
@@ -153,7 +152,7 @@ void renderObjects()
 	//cube->render(g_DeviceContext);
 	
 	obj->MapMatrixBuffers(g_DeviceContext, g_MatrixBuffer, Mtyre, Mview, Mproj);
-	obj->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 0, 0, 0, 0 });
+	obj->MapMaterialBuffers(g_DeviceContext, g_MaterialBuffer, { 0.1f, 0.1f, 0.1f, 0 }, { 0.5f, 0.5f, 0.5f, 0.2f }, { 0.5f, 0.5f, 0.5f, 0 });
 	obj->render(g_DeviceContext);
 }
 
@@ -509,19 +508,10 @@ void InitShaderBuffers()
 	CameraBuffer_desc.MiscFlags = 0;
 	CameraBuffer_desc.StructureByteStride = 0;
 
-	// Light buffer
-	D3D11_BUFFER_DESC LightBuffer_desc = { 0 };
-	LightBuffer_desc.Usage = D3D11_USAGE_DYNAMIC;
-	LightBuffer_desc.ByteWidth = sizeof(LightBuffer_t);
-	LightBuffer_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	LightBuffer_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	LightBuffer_desc.MiscFlags = 0;
-	LightBuffer_desc.StructureByteStride = 0;
 
 	ASSERT(hr = g_Device->CreateBuffer(&MatrixBuffer_desc, nullptr, &g_MatrixBuffer));
 	ASSERT(hr = g_Device->CreateBuffer(&MaterialBuffer_desc, nullptr, &g_MaterialBuffer)); 
 	ASSERT(hr = g_Device->CreateBuffer(&CameraBuffer_desc, nullptr, &g_CameraBuffer));
-	ASSERT(hr = g_Device->CreateBuffer(&LightBuffer_desc, nullptr, &g_LightBuffer));
 }
 
 HRESULT CreateRenderTargetView()
@@ -617,9 +607,8 @@ HRESULT Render(float deltaTime)
 
 	g_DeviceContext->PSSetConstantBuffers(0, 1, &g_MaterialBuffer);
 
-	g_DeviceContext->VSSetConstantBuffers(1, 1, &g_CameraBuffer);
+	g_DeviceContext->PSSetConstantBuffers(1, 1, &g_CameraBuffer);
 
-	g_DeviceContext->VSSetConstantBuffers(2, 1, &g_LightBuffer);
 
 	// time to render our objects
 	renderObjects();

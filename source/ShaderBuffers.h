@@ -27,7 +27,7 @@ using namespace linalg;
 
 struct MaterialBuffer_t
 {
-	vec4f Color;
+	vec4f Ka, Kd, Ks;
 };
 
 #endif
@@ -43,20 +43,6 @@ using namespace linalg;
 struct CameraBuffer_t
 {
 	vec4f cameraPosition;
-};
-
-#endif
-
-#ifndef LIGHTBUFFERS_H
-#define LIGHTBUFFERS_H
-
-#include "vec\vec.h"
-#include "vec\mat.h"
-
-using namespace linalg;
-
-struct LightBuffer_t
-{
 	vec4f lightPosition;
 };
 

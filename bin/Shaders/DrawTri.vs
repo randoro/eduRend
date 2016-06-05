@@ -6,16 +6,6 @@ cbuffer MatrixBuffer : register(b0)
 	matrix ProjectionMatrix;
 };
 
-cbuffer CameraBuffer : register(b1)
-{
-	float4 cameraPosition;
-};
-
-cbuffer LightBuffer : register(b2)
-{
-	float4 lightPosition;
-};
-
 struct VSIn
 {
 	float3 Pos : POSITION;
@@ -33,8 +23,6 @@ struct PSIn
 	float4 WorldPos : WorldPos;
 	float3 Tangent : TANGENT;
 	float3 Binormal : BINORMAL;
-	float4 CameraPos : CameraPos;
-	float4 LightPos : LightPos;
 };
 
 //-----------------------------------------------------------------------------------------
@@ -45,23 +33,16 @@ PSIn VS_main(VSIn input)
 	PSIn output = (PSIn)0;
 	
 	// model-to-view
-	//matrix MV = mul(ModelToWorldMatrix, WorldToViewMatrix);
 	matrix MV = mul(WorldToViewMatrix, ModelToWorldMatrix);
-	matrix VM = mul(ModelToWorldMatrix, WorldToViewMatrix);
 	// model-to-projection
-	//matrix MVP = mul(MV, ProjectionMatrix);
 	matrix MVP = mul(ProjectionMatrix, MV);
 	
-	//float2 inv = { input.TexCoord.x, -input.TexCoord.y };
-
 	output.Pos = mul(MVP, float4(input.Pos, 1));
-	output.Normal = mul(MV, input.Normal);
-	output.Tangent = mul(MV, input.Tangent);
-	output.Binormal = mul(MV, input.Binormal);
-	output.TexCoord = input.TexCoord;
-	output.WorldPos = mul(MV, input.Pos);
-	output.CameraPos = mul(WorldToViewMatrix, cameraPosition);
-	output.LightPos =  mul(WorldToViewMatrix, lightPosition);
+	output.Normal = mul(ModelToWorldMatrix, input.Normal);
+	output.Tangent = mul(ModelToWorldMatrix, input.Tangent);
+	output.Binormal = mul(ModelToWorldMatrix, input.Binormal);
+	output.TexCoord = float2(input.TexCoord.x, 1-input.TexCoord.y);
+	output.WorldPos = mul(ModelToWorldMatrix, input.Pos);
 
 	return output;
 }

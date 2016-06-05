@@ -41,7 +41,7 @@ public:
 		// map the resource buffer, obtain a pointer to it and then write our matrices to it
 		D3D11_MAPPED_SUBRESOURCE resource;
 		device_context->Map(light_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
-		LightBuffer_t* light_buffer_ = (LightBuffer_t*)resource.pData;
+		CameraBuffer_t* light_buffer_ = (CameraBuffer_t*)resource.pData;
 		light_buffer_->lightPosition = { position.x, position.y, position.z, 0 };
 		device_context->Unmap(light_buffer, 0);
 	}

@@ -47,8 +47,8 @@ public:
 
 	virtual void MapMaterialBuffers(
 		ID3D11DeviceContext* device_context,
-		ID3D11Buffer* matrix_buffer,
-		vec4f Color);
+		ID3D11Buffer* material_buffer,
+		vec4f Ka, vec4f Kd, vec4f Ks);
 
 	virtual void render(ID3D11DeviceContext* device_context) const = 0;
 

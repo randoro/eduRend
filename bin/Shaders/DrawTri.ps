@@ -2,14 +2,19 @@
 
 cbuffer MaterialBuffer : register(b0)
 {
-	float4 color;
+	float4 Ka, Kd, Ks;
+};
+
+cbuffer CameraBuffer : register(b1)
+{
+	float4 lightPosition;
+	float4 cameraPosition;
 };
 
 
 Texture2D texDiffuse : register(t0);
 Texture2D texNormal : register(t1);
 SamplerState texSampler : register(s0);
-SamplerState texNormalSampler : register(s1);
 
 struct PSIn
 {
@@ -19,8 +24,6 @@ struct PSIn
 	float4 WorldPos : WorldPos;
 	float3 Tangent : TANGENT;
 	float3 Binormal : BINORMAL;
-	float4 CameraPos : CameraPos;
-	float4 LightPos : LightPos;
 };
 
 //-----------------------------------------------------------------------------------------
@@ -28,39 +31,28 @@ struct PSIn
 //-----------------------------------------------------------------------------------------
 float4 PS_main(PSIn input) : SV_Target
 {
-	float2 inv = { input.TexCoord.x, -input.TexCoord.y };
-
-
-	float3x3 TBN = float3x3(normalize(input.Tangent), normalize(input.Binormal),
-      normalize(input.Normal));
-
-	float4 texColor = texNormal.Sample(texNormalSampler, inv);
-
-	float4 minus = { 1, 1, 1, 1 };
-
-	float4 normalTexColor = mul(texColor, 2) - minus;
-
-	float3 vecNormal = { normalTexColor.x, normalTexColor.y, normalTexColor.z };
-
-	float3 realNormal = mul(TBN, normalize(vecNormal));
-
-	float4 lightColor = { 1, 0, 0, 0 };
-	float4 lightColorBlue = { 1, 1, 1, 0 };
-	float4 difuseTexColor = texDiffuse.Sample(texSampler, inv);
-
-	//calculate lighting vectors
+	float3 T = normalize(input.Tangent);
+	float3 B = normalize(input.Binormal);
     float3 N = normalize(input.Normal);
-    float3 V = normalize((float3) input.CameraPos - (float3) input.WorldPos );
-	
-	float3 L = normalize((float3) input.LightPos - (float3) input.WorldPos);
-    float3 R = reflect(-L, N);
+    
+	float3 texNormalColor = texNormal.Sample(texSampler, input.TexCoord) * 2 - 1;
 
+	float3x3 TBN = transpose(float3x3(T, B, N));
+	float3 TBN_N = mul(TBN, texNormalColor);
 	
-	float4 Ia = saturate(color * saturate(1.0));
-    float4 Id = saturate(difuseTexColor * dot(L,N));
-    float4 Is = lightColorBlue * pow(saturate(dot(R,V)), 10 ); 
- 
-    return Ia + Id + Is;
+	float4 texDiffuseColor = texDiffuse.Sample(texSampler, input.TexCoord);
+
+
+	float3 L = normalize(lightPosition - input.WorldPos);
+	float3 V = normalize(cameraPosition - input.WorldPos);
+	float3 R = reflect(-L, TBN_N);
+	float a = 500;
+
+	float4 Id = saturate(texDiffuseColor * dot(TBN_N, L));
+    float4 Is = saturate(Ks * pow(dot(R,V), a)); 
+
+	float4 I = Ka + Id + Is;
+	return I;
 
 	
 

@@ -49,15 +49,17 @@ void Geometry_t::MapMatrixBuffers(
 
 void Geometry_t::MapMaterialBuffers(
 	ID3D11DeviceContext* device_context,
-	ID3D11Buffer* matrix_buffer,
-	vec4f Color)
+	ID3D11Buffer* material_buffer,
+	vec4f Ka, vec4f Kd, vec4f Ks)
 {
 	// map the resource buffer, obtain a pointer to it and then write our matrices to it
 	D3D11_MAPPED_SUBRESOURCE resource;
-	device_context->Map(matrix_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
-	MaterialBuffer_t* matrix_buffer_ = (MaterialBuffer_t*)resource.pData;
-	matrix_buffer_->Color = Color;
-	device_context->Unmap(matrix_buffer, 0);
+	device_context->Map(material_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+	MaterialBuffer_t* material_buffer_ = (MaterialBuffer_t*)resource.pData;
+	material_buffer_->Ka = Ka;
+	material_buffer_->Kd = Kd;
+	material_buffer_->Ks = Ks;
+	device_context->Unmap(material_buffer, 0);
 }
 
 
@@ -551,6 +553,7 @@ void OBJModel_t::render(ID3D11DeviceContext* device_context) const
 		// fetch material and bind texture
 		const material_t& mtl = materials[irange.mtl_index];
 		device_context->PSSetShaderResources(0, 1, &mtl.map_Kd_TexSRV);
+		device_context->PSSetShaderResources(1, 1, &mtl.map_bump_TexSRV);
 
 		//bind sampler
 		device_context->PSSetSamplers(0, 1, &SamplerState);
@@ -561,21 +564,61 @@ void OBJModel_t::render(ID3D11DeviceContext* device_context) const
 }
 
 
+
 void Geometry_t::compute_tangentspace(vertex_t& v0, vertex_t& v1, vertex_t& v2)
 {
-	float3 v2v1 = { v1.Pos.x - v0.Pos.x, v1.Pos.y - v0.Pos.y, v1.Pos.z - v0.Pos.z };
-	float3 v3v1 = { v2.Pos.x - v0.Pos.x, v2.Pos.y - v0.Pos.y, v2.Pos.z - v0.Pos.z };
+	vec3f tangent, binormal;
+	vec3f D, E;
+	vec2f F, G;
 
-	vec2f c2c1 = { v1.TexCoord.x - v0.TexCoord.x, v1.TexCoord.y - v0.TexCoord.y };
-	vec2f c3c1 = { v2.TexCoord.x - v0.TexCoord.x, v2.TexCoord.y - v0.TexCoord.y };
+	//LENGYEL'S METHOD
 
-	float scaleFactor = 0.5f;
+	//Calculate distance between all vertex points (x,y,z). Builds traingle DE.
+	D = v1.Pos - v0.Pos;
+	E = v2.Pos - v0.Pos;
 
-	float3 T = (v2v1.operator*(c3c1.y) - v3v1.operator*(c2c1.y)) * scaleFactor;
-	float3 B = (v2v1.operator*(-c3c1.x) - v3v1.operator*(c2c1.x)) * scaleFactor;
+	//calulate distance between all texture coordinate points (u,v). Builds triangle FG.
+	F = v1.TexCoord - v0.TexCoord;
+	G = v2.TexCoord - v0.TexCoord;
 
-	v0.Tangent = v1.Tangent = v2.Tangent = T;
-	v0.Binormal = v1.Binormal = v2.Binormal = B;
+	//Matris invers - beräkning
+	mat2f FG;
+	FG.m11 = F.x;
+	FG.m12 = F.y;
+	FG.m21 = G.x;
+	FG.m22 = G.y;
+	FG.invert();
 
-	int r = 1;
+	tangent.x = FG.m11 * D.x + FG.m12 * E.x;
+	tangent.y = FG.m11 * D.y + FG.m12 * E.y;
+	tangent.z = FG.m11 * D.y + FG.m12 * E.z;
+
+	binormal.x = FG.m21 * D.x + FG.m22 * E.x;
+	binormal.y = FG.m21 * D.y + FG.m22 * E.y;
+	binormal.z = FG.m21 * D.z + FG.m22 * E.z;
+
+	tangent.normalize();
+	binormal.normalize();
+
+	v0.Tangent = v1.Tangent = v2.Tangent = tangent;
+	v0.Binormal = v1.Binormal = v2.Binormal = binormal;
 }
+
+//void Geometry_t::compute_tangentspace(vertex_t& v0, vertex_t& v1, vertex_t& v2)
+//{
+//	float3 v2v1 = { v1.Pos.x - v0.Pos.x, v1.Pos.y - v0.Pos.y, v1.Pos.z - v0.Pos.z };
+//	float3 v3v1 = { v2.Pos.x - v0.Pos.x, v2.Pos.y - v0.Pos.y, v2.Pos.z - v0.Pos.z };
+//
+//	vec2f c2c1 = { v1.TexCoord.x - v0.TexCoord.x, v1.TexCoord.y - v0.TexCoord.y };
+//	vec2f c3c1 = { v2.TexCoord.x - v0.TexCoord.x, v2.TexCoord.y - v0.TexCoord.y };
+//
+//	float scaleFactor = 0.5f;
+//
+//	float3 T = (v2v1.operator*(c3c1.y) - v3v1.operator*(c2c1.y)) * scaleFactor;
+//	float3 B = (v2v1.operator*(-c3c1.x) - v3v1.operator*(c2c1.x)) * scaleFactor;
+//
+//	v0.Tangent = v1.Tangent = v2.Tangent = T;
+//	v0.Binormal = v1.Binormal = v2.Binormal = B;
+//
+//	int r = 1;
+//}
