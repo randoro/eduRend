@@ -7,8 +7,8 @@ cbuffer MaterialBuffer : register(b0)
 
 cbuffer CameraBuffer : register(b1)
 {
-	float4 lightPosition;
 	float4 cameraPosition;
+	float4 lightPosition;
 };
 
 
@@ -51,7 +51,7 @@ float4 PS_main(PSIn input) : SV_Target
 	float4 Id = saturate(texDiffuseColor * dot(TBN_N, L));
     float4 Is = saturate(Ks * pow(dot(R,V), a)); 
 
-	float4 I = Ka + Id + Is;
+	float4 I = Id + Is;
 	return I;
 
 	

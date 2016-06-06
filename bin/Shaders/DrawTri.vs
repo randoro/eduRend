@@ -42,7 +42,7 @@ PSIn VS_main(VSIn input)
 	output.Tangent = mul(ModelToWorldMatrix, input.Tangent);
 	output.Binormal = mul(ModelToWorldMatrix, input.Binormal);
 	output.TexCoord = float2(input.TexCoord.x, 1-input.TexCoord.y);
-	output.WorldPos = mul(ModelToWorldMatrix, input.Pos);
+	output.WorldPos = mul(ModelToWorldMatrix, float4(input.Pos, 1));
 
 	return output;
 }

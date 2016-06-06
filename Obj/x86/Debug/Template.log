@@ -1,8 +1,8 @@
-﻿Build started 2016-06-06 00:15:26.
+﻿Build started 2016-06-06 13:12:58.
      1>Project "D:\SourceTree\eduRend\source\Template.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\DirectXTK\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"D:\SourceTree\eduRend\source\../Obj/x86/Debug/" /Fd"D:\SourceTree\eduRend\source\../Obj/x86/Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt InputHandler.cpp Main.cpp vec\mat.cpp vec\vec.cpp
-         Main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\DirectXTK\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"D:\SourceTree\eduRend\source\../Obj/x86/Debug/" /Fd"D:\SourceTree\eduRend\source\../Obj/x86/Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Geometry.cpp InputHandler.cpp Main.cpp vec\mat.cpp vec\vec.cpp
+         Geometry.cpp
          c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
      1>d:\sourcetree\edurend\source\vec\math.h(48): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
      1>d:\sourcetree\edurend\source\file_rw.h(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -11,24 +11,20 @@
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
      1>d:\sourcetree\edurend\source\mesh.h(68): warning C4018: '<' : signed/unsigned mismatch
      1>d:\sourcetree\edurend\source\mesh.h(71): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\sourcetree\edurend\source\main.cpp(178): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
-     1>d:\sourcetree\edurend\source\main.cpp(179): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
-     1>d:\sourcetree\edurend\source\main.cpp(180): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(226) : see declaration of 'freopen'
-     1>d:\sourcetree\edurend\source\vec\mat.h(526): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-                 d:\sourcetree\edurend\source\vec\mat.h(523) : while compiling class template member function 'linalg::mat4<float> linalg::mat4<float>::rotation(const T &,const T &,const T &,const T &)'
-                 with
-                 [
-                     T=float
-                 ]
-                 d:\sourcetree\edurend\source\camera.h(98) : see reference to function template instantiation 'linalg::mat4<float> linalg::mat4<float>::rotation(const T &,const T &,const T &,const T &)' being compiled
-                 with
-                 [
-                     T=float
-                 ]
-                 d:\sourcetree\edurend\source\vec\mat.h(660) : see reference to class template instantiation 'linalg::mat4<float>' being compiled
+     1>d:\sourcetree\edurend\source\geometry.cpp(100): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(113): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(379): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(392): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(478): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\geometry.cpp(491): warning C4244: 'initializing' : conversion from 'float' to 'UINT', possible loss of data
+     1>d:\sourcetree\edurend\source\vec\vec.h(253): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+                 d:\sourcetree\edurend\source\vec\vec.h(246) : while compiling class template member function 'linalg::vec3<float> &linalg::vec3<float>::normalize(void)'
+                 d:\sourcetree\edurend\source\geometry.cpp(600) : see reference to function template instantiation 'linalg::vec3<float> &linalg::vec3<float>::normalize(void)' being compiled
+                 d:\sourcetree\edurend\source\vec\vec.h(531) : see reference to class template instantiation 'linalg::vec3<float>' being compiled
+     1>d:\sourcetree\edurend\source\vec\mat.h(75): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
+                 d:\sourcetree\edurend\source\vec\mat.h(72) : while compiling class template member function 'linalg::mat2<float> linalg::mat2<float>::invert(void) const'
+                 d:\sourcetree\edurend\source\geometry.cpp(590) : see reference to function template instantiation 'linalg::mat2<float> linalg::mat2<float>::invert(void) const' being compiled
+                 d:\sourcetree\edurend\source\vec\mat.h(658) : see reference to class template instantiation 'linalg::mat2<float>' being compiled
      1>d:\sourcetree\edurend\source\vec\vec.h(479): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
                  d:\sourcetree\edurend\source\mesh.h(58) : see reference to function template instantiation 'linalg::vec3<float> linalg::normalize<float>(const linalg::vec3<float> &)' being compiled
          Generating Code...
@@ -36,6 +32,7 @@
          vec.cpp
          mat.cpp
          InputHandler.cpp
+         Main.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\DirectXTK\lib\debug DirectXTK.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"D:\SourceTree\eduRend\source\../Bin/x86/eduRendD.lib" /MACHINE:X86 /SAFESEH D:\SourceTree\eduRend\source\../Obj/x86/Debug/Geometry.obj
          D:\SourceTree\eduRend\source\../Obj/x86/Debug/InputHandler.obj
@@ -48,4 +45,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.31
+Time Elapsed 00:00:01.95
