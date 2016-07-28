@@ -571,17 +571,17 @@ void Geometry_t::compute_tangentspace(vertex_t& v0, vertex_t& v1, vertex_t& v2)
 	vec3f D, E;
 	vec2f F, G;
 
-	//LENGYEL'S METHOD
+	//LENGEYLS METHOD
 
-	//Calculate distance between all vertex points (x,y,z). Builds traingle DE.
+	//calculate distance between all vertex points (x,y,z). Then build traingle DE.
 	D = v1.Pos - v0.Pos;
 	E = v2.Pos - v0.Pos;
 
-	//calulate distance between all texture coordinate points (u,v). Builds triangle FG.
+	//calulate distance between all texture coordinate points (u,v). Then build triangle FG.
 	F = v1.TexCoord - v0.TexCoord;
 	G = v2.TexCoord - v0.TexCoord;
 
-	//Matris invers - beräkning
+	//Matris invers - calculation
 	mat2f FG;
 	FG.m11 = F.x;
 	FG.m12 = F.y;
@@ -603,22 +603,3 @@ void Geometry_t::compute_tangentspace(vertex_t& v0, vertex_t& v1, vertex_t& v2)
 	v0.Tangent = v1.Tangent = v2.Tangent = tangent;
 	v0.Binormal = v1.Binormal = v2.Binormal = binormal;
 }
-
-//void Geometry_t::compute_tangentspace(vertex_t& v0, vertex_t& v1, vertex_t& v2)
-//{
-//	float3 v2v1 = { v1.Pos.x - v0.Pos.x, v1.Pos.y - v0.Pos.y, v1.Pos.z - v0.Pos.z };
-//	float3 v3v1 = { v2.Pos.x - v0.Pos.x, v2.Pos.y - v0.Pos.y, v2.Pos.z - v0.Pos.z };
-//
-//	vec2f c2c1 = { v1.TexCoord.x - v0.TexCoord.x, v1.TexCoord.y - v0.TexCoord.y };
-//	vec2f c3c1 = { v2.TexCoord.x - v0.TexCoord.x, v2.TexCoord.y - v0.TexCoord.y };
-//
-//	float scaleFactor = 0.5f;
-//
-//	float3 T = (v2v1.operator*(c3c1.y) - v3v1.operator*(c2c1.y)) * scaleFactor;
-//	float3 B = (v2v1.operator*(-c3c1.x) - v3v1.operator*(c2c1.x)) * scaleFactor;
-//
-//	v0.Tangent = v1.Tangent = v2.Tangent = T;
-//	v0.Binormal = v1.Binormal = v2.Binormal = B;
-//
-//	int r = 1;
-//}
